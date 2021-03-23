@@ -44,22 +44,33 @@ describe('Turns', function() {
     expect(card1).to.equal(card);
   });
 
-  it('should evaluate guess', function () {
+  it('should evaluate negative guess', function () {
+    const card = new Card(1, 'Name the world\'s largest ocean', ['Pacific', 'Atlantic', 'Artic'], 'Pacific');
+    const turn = new Turn ('Atlantic', card);
+    const guess1 = turn.evaluateGuess();
+    expect(guess1).to.equal(false);
+  });
+
+  it('should evaluate positive guess', function() {
     const card = new Card(1, 'Name the world\'s largest ocean', ['Pacific', 'Atlantic', 'Artic'], 'Pacific');
     const turn = new Turn ('Pacific', card);
     const guess1 = turn.evaluateGuess();
     expect(guess1).to.equal(true);
+  })
+
+  it('should give positive feedback', function() {
+    const card = new Card(1, 'Name the world\'s largest ocean', ['Pacific', 'Atlantic', 'Artic'], 'Pacific');
+    const turn1 = new Turn ('Pacific', card);
+    const guess1 = turn1.giveFeedback();
+
+    expect(guess1).to.equal('Correct!');
   });
 
-  it('should give feedback', function() {
+  it('should give negative feedback', function() {
     const card = new Card(1, 'Name the world\'s largest ocean', ['Pacific', 'Atlantic', 'Artic'], 'Pacific');
     const turn1 = new Turn ('Atlantic', card);
-    const turn2 = new Turn ('Pacific', card);
     const guess1 = turn1.giveFeedback();
-    const guess2 = turn2.giveFeedback();
 
     expect(guess1).to.equal('Incorrect!');
-
-    expect(guess2).to.equal('Correct!');
   })
 })
