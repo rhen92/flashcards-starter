@@ -34,5 +34,11 @@ class Round {
       return percentageCorrect;
     }
   }
+
+  endRound() {
+    if(!this.currentCard) {
+      return `** Round Over! ** You answered ${this.calculatePercentCorrect()} of the questions correctly!`;
+    }
+  }
 }
 module.exports = Round;
