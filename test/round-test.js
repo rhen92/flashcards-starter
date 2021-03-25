@@ -21,12 +21,10 @@ describe('Round', function() {
   });
 
   it('should be a function', function() {
-    const round = new Round;
     expect(Round).to.be.a('function');
   });
 
   it('should be an instance of Round', function() {
-    const round = new Round();
     expect(round).to.be.an.instanceof(Round);
   });
 
@@ -49,8 +47,8 @@ describe('Round', function() {
   });
 
   it('should increase turns when a turn is taken', function() {
-    const turn = new Turn('Atlantic', card1);
-    const guess1 = round.takeTurn(turn);
+    //const turn = new Turn('Atlantic', card1);
+    const guess1 = round.takeTurn('Atlantic');
     expect(round.turns).to.equal(1);
   });
 
@@ -58,14 +56,14 @@ describe('Round', function() {
     const turn = new Turn('Atlantic', card1);
     turn.evaluateGuess();
     turn.giveFeedback();
-    expect(round.takeTurn(turn)).to.equal('Incorrect!');
+    expect(round.takeTurn('Atlantic')).to.equal('Incorrect!');
   });
 
   it('should return positive feedback after taking a turn if correct', function() {
     const turn = new Turn('Pacific', card1);
     turn.evaluateGuess();
     turn.giveFeedback();
-    expect(round.takeTurn(turn)).to.equal('Correct!');
+    expect(round.takeTurn('Pacific')).to.equal('Correct!');
   })
 
   it('should record incorrect guesses', function() {
@@ -80,11 +78,23 @@ describe('Round', function() {
     const turn = new Turn('Pacific', card1);
     turn.evaluateGuess();
     turn.giveFeedback();
-    round.takeTurn(turn);
-    const turn2 = new Turn('3000', card2)
-    const changeCard = round.returnCurrentCard(turn2);
+    round.takeTurn('Pacific');
+    const turn2 = new Turn('3000', card2);
+    const changeCard = round.returnCurrentCard();
     expect(changeCard).to.equal(card2);
   });
 
-
+  it('should calculate percent correct', function() {
+    const turn = new Turn('Atlantic', card1);
+    round.returnCurrentCard(turn);
+    turn.evaluateGuess();
+    turn.giveFeedback();
+    round.takeTurn('Atlantic');
+    const turn2 = new Turn('3000', card2);
+    round.returnCurrentCard(turn2);
+    turn.evaluateGuess();
+    turn.giveFeedback();
+    round.takeTurn('3000');
+    expect(round.calculatePercentCorrect()).to.equal(0);
+  })
 })
