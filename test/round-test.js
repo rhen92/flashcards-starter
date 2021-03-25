@@ -115,6 +115,6 @@ describe('Round', function() {
     turn3.giveFeedback();
     round.takeTurn('Tiger');
     const percentCorrect = round.calculatePercentCorrect();
-    expect(round.endRound()).to.equal(`** Round Over! ** You answered ${percentCorrect} of the questions correctly!`);
+    expect(round.endRound()).to.equal(`** Round Over! ** You answered ${percentCorrect}% of the questions correctly!`);
   })
 })
