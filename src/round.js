@@ -21,7 +21,7 @@ class Round {
       this.incorrectGuesses.push(turn.currentCard.id);
     }
     const index = this.deck.totalCards.indexOf(this.currentCard) + 1;
-    this.currentCard = this.deck.totalCards[index]
+    this.currentCard = this.deck.totalCards[index];
     return turn.giveFeedback();
   }
 
@@ -30,15 +30,13 @@ class Round {
       const percentCorrect = (0 / this.incorrectGuesses.length) * 100;
       return percentCorrect;
     } else {
-      const percentageCorrect = (this.incorrectGuesses.length / this.turns) * 100;
+      const percentageCorrect = Math.floor(((this.turns - this.incorrectGuesses.length) / this.turns) * 100);
       return percentageCorrect;
     }
   }
 
   endRound() {
-    if(!this.currentCard) {
-      return `** Round Over! ** You answered ${this.calculatePercentCorrect()} of the questions correctly!`;
+      return `** Round Over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
     }
-  }
 }
 module.exports = Round;
