@@ -86,15 +86,35 @@ describe('Round', function() {
 
   it('should calculate percent correct', function() {
     const turn = new Turn('Atlantic', card1);
-    round.returnCurrentCard(turn);
+    round.returnCurrentCard();
     turn.evaluateGuess();
     turn.giveFeedback();
     round.takeTurn('Atlantic');
     const turn2 = new Turn('3000', card2);
-    round.returnCurrentCard(turn2);
-    turn.evaluateGuess();
-    turn.giveFeedback();
+    round.returnCurrentCard();
+    turn2.evaluateGuess();
+    turn2.giveFeedback();
     round.takeTurn('3000');
     expect(round.calculatePercentCorrect()).to.equal(0);
+  });
+
+  it('should end round when no more cards to go through', function() {
+    const turn = new Turn('Atlantic', card1);
+    round.returnCurrentCard();
+    turn.evaluateGuess();
+    turn.giveFeedback();
+    round.takeTurn('Atlantic');
+    const turn2 = new Turn('3000', card2);
+    round.returnCurrentCard();
+    turn2.evaluateGuess();
+    turn2.giveFeedback();
+    round.takeTurn('3000');
+    const turn3 = new Turn('Tiger', card3);
+    round.returnCurrentCard();
+    turn3.evaluateGuess();
+    turn3.giveFeedback();
+    round.takeTurn('Tiger');
+    const percentCorrect = round.calculatePercentCorrect();
+    expect(round.endRound()).to.equal(`** Round Over! ** You answered ${percentCorrect} of the questions correctly!`);
   })
 })
