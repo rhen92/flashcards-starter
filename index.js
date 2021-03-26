@@ -1,6 +1,15 @@
-const http = require('http');
-let app = http.createServer();
+const Game = require('./src/Game');
+const Round = require('./src/round');
+const Card = require('./src/Card');
+const Deck = require('./src/deck');
+const Turn = require('./src/turn');
+const data = require('./src/data');
+const prototypeQuestions = data.prototypeData;
 
-// Start the server on port 3000
-app.listen(3000, '127.0.0.1');  
-console.log('Node server running on port 3000'); 
+var cards = prototypeQuestions.map((info) => {
+  return new Card(info.id, info.question, info.answers, info.correctAnswer)
+});
+var deck1 = new Deck(cards);
+var round = new Round(deck1);
+var game = new Game(round);
+game.start();
