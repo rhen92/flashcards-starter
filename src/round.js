@@ -36,7 +36,7 @@ class Round {
   }
 
   endRound() {
-      return `** Round Over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
-    }
+    return `** Round Over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
+  }
 }
 module.exports = Round;
