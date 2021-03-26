@@ -13,7 +13,7 @@ class Turn {
   }
 
   evaluateGuess() {
-    if(this.guess === this.currentCard.correctAnswer) {
+    if (this.guess === this.currentCard.correctAnswer) {
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ class Turn {
   }
 
   giveFeedback() {
-    if(this.evaluateGuess()) {
+    if (this.evaluateGuess()) {
       return 'Correct!';
     } else {
       return 'Incorrect!';

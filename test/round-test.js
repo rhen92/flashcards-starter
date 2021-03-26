@@ -12,6 +12,7 @@ describe('Round', function() {
   let card3;
   let deck1;
   let round;
+
   beforeEach(function() {
     card1 = new Card(1, 'Name the world\'s largest ocean.', ['Pacific', 'Atlantic', 'Artic'], 'Pacific');
     card2 = new Card(2, 'How many taste buds does the average human tongue have?', ['3000', '5000', '10,000', '15,000'], '10,000');
@@ -115,6 +116,6 @@ describe('Round', function() {
     turn3.giveFeedback();
     round.takeTurn('Tiger');
     const percentCorrect = round.calculatePercentCorrect();
-    expect(round.endRound()).to.equal(`** Round Over! ** You answered ${percentCorrect} of the questions correctly!`);
-  })
+    expect(round.endRound()).to.equal(`** Round Over! ** You answered ${percentCorrect}% of the questions correctly!`);
+  });
 })
